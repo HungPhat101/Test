@@ -7,8 +7,12 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo 'Xin chào, đây là bước build!'
-                sh 'python --version'
+                timeout(time: 1, unit: 'MINUTES') {
+                    retry(2) {
+                        echo 'Xin chào, đây là bước build!'
+                        sh 'python --version'
+                    }
+                }
             }
         }
     }
